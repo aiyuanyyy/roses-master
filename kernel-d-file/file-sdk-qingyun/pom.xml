@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cn.stylefeng.roses</groupId>
+        <artifactId>kernel-d-file</artifactId>
+        <version>8.1.1</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>file-sdk-qingyun</artifactId>
+
+    <packaging>jar</packaging>
+
+    <dependencies>
+
+        <!--file模块的api-->
+        <dependency>
+            <groupId>cn.stylefeng.roses</groupId>
+            <artifactId>file-api</artifactId>
+            <version>${roses.version}</version>
+        </dependency>
+
+        <!--青云的OSS-->
+        <dependency>
+            <groupId>com.yunify</groupId>
+            <artifactId>qingstor.sdk.java</artifactId>
+            <version>${qingyun.oss.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

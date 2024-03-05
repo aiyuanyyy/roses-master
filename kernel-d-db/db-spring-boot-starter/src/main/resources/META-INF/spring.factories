@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.stylefeng.roses.kernel.db.starter.SingleDataSourceAutoConfiguration,\
+  cn.stylefeng.roses.kernel.db.starter.ProjectDruidPropertiesAutoConfiguration,\
+  cn.stylefeng.roses.kernel.db.starter.ProjectMyBatisPlusAutoConfiguration,\
+  cn.stylefeng.roses.kernel.db.starter.ProjectDruidMonitorAutoConfiguration,\
+  cn.stylefeng.roses.kernel.db.starter.RemoveDruidAdAutoConfiguration
+org.springframework.context.ApplicationListener=\
+  cn.stylefeng.roses.kernel.db.api.maxsort.listener.TableMaxSortConfigListener

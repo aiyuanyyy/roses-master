@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cn.stylefeng.roses</groupId>
+        <artifactId>kernel-d-wrapper</artifactId>
+        <version>8.1.1</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>wrapper-field-sdk</artifactId>
+
+    <packaging>jar</packaging>
+
+    <dependencies>
+
+        <!--wrapper模块的api-->
+        <dependency>
+            <groupId>cn.stylefeng.roses</groupId>
+            <artifactId>wrapper-api</artifactId>
+            <version>${roses.version}</version>
+        </dependency>
+
+        <!--字典模块的api-->
+        <!--新增加了一个字典编码的转化-->
+        <dependency>
+            <groupId>cn.stylefeng.roses</groupId>
+            <artifactId>dict-api</artifactId>
+            <version>${roses.version}</version>
+        </dependency>
+
+        <!--jackson相关基础依赖-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

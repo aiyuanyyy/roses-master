@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cn.stylefeng.roses</groupId>
+        <artifactId>kernel-d-file</artifactId>
+        <version>8.1.1</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>file-spring-boot-starter</artifactId>
+
+    <packaging>jar</packaging>
+
+    <dependencies>
+
+        <!--文件的在线管理-->
+        <dependency>
+            <groupId>cn.stylefeng.roses</groupId>
+            <artifactId>file-business</artifactId>
+            <version>${roses.version}</version>
+        </dependency>
+
+        <!--文件sdk的实现，默认用本地存文件-->
+        <dependency>
+            <groupId>cn.stylefeng.roses</groupId>
+            <artifactId>file-sdk-local</artifactId>
+            <version>${roses.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
