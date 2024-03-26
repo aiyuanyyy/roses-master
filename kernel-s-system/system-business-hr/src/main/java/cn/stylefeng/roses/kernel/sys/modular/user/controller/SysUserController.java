@@ -111,6 +111,7 @@ public class SysUserController {
      */
     @GetResource(name = "分页查询-用户信息", path = "/sysUser/page")
     public ResponseData<PageResult<SysUser>> page(SysUserRequest sysUserRequest) {
+        sysUserRequest.setPageSize(500);
         return new SuccessResponseData<>(sysUserService.findPage(sysUserRequest));
     }
 

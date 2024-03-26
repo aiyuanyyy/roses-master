@@ -57,6 +57,24 @@ public class SysUser extends BaseExpandFieldEntity implements GetSortKey {
     @TableField("account")
     @ChineseDescription("账号")
     private String account;
+    /**
+     * 中介费比例
+     */
+    @TableField("persent1")
+    @ChineseDescription("中介费比例")
+    private String persent1;
+    /**
+     * 股东分成比例
+     */
+    @TableField("persent2")
+    @ChineseDescription("股东分成比例")
+    private String persent2;
+    /**
+     * 老板比例
+     */
+    @TableField("persent3")
+    @ChineseDescription("老板比例")
+    private String persent3;
 
     /**
      * 密码，加密方式：md5+盐
