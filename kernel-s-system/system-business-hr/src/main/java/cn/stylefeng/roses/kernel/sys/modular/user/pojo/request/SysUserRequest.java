@@ -40,6 +40,13 @@ public class SysUserRequest extends BaseRequest {
     @NotBlank(message = "姓名不能为空", groups = {add.class, edit.class, updateInfo.class})
     private String realName;
 
+
+    /**
+     * 姓名
+     */
+    @ChineseDescription("用户类型")
+    private String userType;
+
     /**
      * 昵称
      */

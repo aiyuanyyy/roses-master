@@ -248,11 +248,19 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         // 分页查询
         Page<SysUser> sysUserPage = this.page(PageFactory.defaultPage(), wrapper);
 
+        //筛选用户类型
+        String userType = sysUserRequest.getUserType();
+        List<SysUser> userList = new ArrayList<>();
         // 遍历查询结果，增加对用户部门信息的返回
         for (SysUser record : sysUserPage.getRecords()) {
             record.setUserOrgDTO(sysUserOrgService.getUserMainOrgInfo(record.getUserId()));
+            record.setUserType(sysUserOrgService.getUserMainOrgInfo(record.getUserId()).getPositionName());
+            if(ObjectUtil.isNotEmpty(userType) && userType.equals(record.getUserType())){
+                userList.add(record);
+            }
         }
 
+        sysUserPage.setRecords(userList);
         return PageResultFactory.createPageResult(sysUserPage);
     }
 
@@ -789,6 +797,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 wrap.or().like(SysUser::getEmployeeNumber, searchText);
             });
         }
+
 
         // 根据状态进行查询
         Integer statusFlag = sysUserRequest.getStatusFlag();

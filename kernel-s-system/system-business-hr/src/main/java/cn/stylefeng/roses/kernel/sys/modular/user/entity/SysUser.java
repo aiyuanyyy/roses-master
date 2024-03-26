@@ -213,6 +213,15 @@ public class SysUser extends BaseExpandFieldEntity implements GetSortKey {
     private UserOrgDTO userOrgDTO;
 
     /**
+     * 用户组织机构详情【只返回主部门】
+     * <p>
+     * 用在用户分页列表的响应
+     */
+    @TableField(exist = false)
+    @ChineseDescription("用户类型")
+    private String userType;
+
+    /**
      * 用户组织机构详情【所有部门都显示】
      * <p>
      * 用在获取用户详情信息的响应
