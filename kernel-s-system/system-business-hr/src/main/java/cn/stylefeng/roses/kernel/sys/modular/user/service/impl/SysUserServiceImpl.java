@@ -125,6 +125,17 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         BusinessLogUtil.addContent("用户详细信息如下：\n", sysUser);
     }
 
+    /**
+     * 获取当前登录用户名
+     * @return
+     */
+    @Override
+    public String getUserName() {
+        LoginUser loginUser = LoginContext.me().getLoginUser();
+        SysUser sysUser = this.getById(loginUser.getUserId());
+        return sysUser.getRealName();
+    }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void del(SysUserRequest sysUserRequest) {
@@ -257,9 +268,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             record.setUserType(sysUserOrgService.getUserMainOrgInfo(record.getUserId()).getPositionName());
             if(ObjectUtil.isNotEmpty(userType) && userType.equals(record.getUserType())){
                 userList.add(record);
+            } else if(ObjectUtil.isEmpty(userType)){
+                userList.add(record);
             }
         }
-
+        sysUserPage.setTotal(userList.size());
         sysUserPage.setRecords(userList);
         return PageResultFactory.createPageResult(sysUserPage);
     }

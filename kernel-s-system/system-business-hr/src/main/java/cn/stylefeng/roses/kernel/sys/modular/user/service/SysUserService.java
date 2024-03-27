@@ -29,6 +29,12 @@ public interface SysUserService extends IService<SysUser>, SysUserServiceApi {
     void add(SysUserRequest sysUserRequest);
 
     /**
+     * 获取当前登录用户名
+     * @return
+     */
+    String getUserName();
+
+    /**
      * 删除
      *
      * @param sysUserRequest 请求参数
