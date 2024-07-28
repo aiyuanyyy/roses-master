@@ -253,7 +253,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         // 只查询需要的字段
         wrapper.select(SysUser::getUserId, SysUser::getRealName, SysUser::getAccount,
                 SysUser::getSex, SysUser::getStatusFlag, BaseEntity::getCreateTime,
-                SysUser::getPersent1,SysUser::getPersent2,SysUser::getPersent3,
                 SysUser::getEmployeeNumber);
 
         // 分页查询

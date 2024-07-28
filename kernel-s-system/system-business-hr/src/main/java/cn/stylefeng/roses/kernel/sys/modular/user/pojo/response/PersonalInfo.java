@@ -29,21 +29,7 @@ public class PersonalInfo {
      */
     @ChineseDescription("账号")
     private String account;
-    /**
-     * 中介费比例
-     */
-    @ChineseDescription("中介费比例")
-    private String persent1;
-    /**
-     * 股东分成比例
-     */
-    @ChineseDescription("股东分成比例")
-    private String persent2;
-    /**
-     * 老板比例
-     */
-    @ChineseDescription("老板比例")
-    private String persent3;
+
 
     /**
      * 头像，存的为文件id

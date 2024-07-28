@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.stream.Collectors;
 
 /**
  * 系统用户控制器
@@ -112,7 +113,9 @@ public class SysUserController {
     @GetResource(name = "分页查询-用户信息", path = "/sysUser/page")
     public ResponseData<PageResult<SysUser>> page(SysUserRequest sysUserRequest) {
         sysUserRequest.setPageSize(500);
-        return new SuccessResponseData<>(sysUserService.findPage(sysUserRequest));
+        PageResult<SysUser> page = sysUserService.findPage(sysUserRequest);
+        page.setRows(page.getRows().stream().filter(item -> !item.getAccount().equals("admin")).collect(Collectors.toList()));
+        return new SuccessResponseData<>(page);
     }
 
     /**

@@ -409,4 +409,7 @@ public class SysThemeServiceImpl extends ServiceImpl<SysThemeMapper, SysTheme> i
         themeCacheApi.remove(ThemeConstants.THEME_GUNS_PLATFORM);
     }
 
+    public void setThemeCacheApi(CacheOperatorApi<DefaultTheme> themeCacheApi) {
+        this.themeCacheApi = themeCacheApi;
+    }
 }
