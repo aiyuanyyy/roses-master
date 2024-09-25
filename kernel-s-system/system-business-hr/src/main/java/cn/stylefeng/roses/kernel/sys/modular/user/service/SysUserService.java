@@ -10,6 +10,8 @@ import cn.stylefeng.roses.kernel.sys.modular.user.pojo.response.PersonalInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 系统用户 服务类
@@ -153,5 +155,5 @@ public interface SysUserService extends IService<SysUser>, SysUserServiceApi {
      * @since 2024/2/12 22:41
      */
     void quickBatchSaveUser(List<SysUser> batchUser);
-
+    Map<Long,String> getGudongMap(Set<String> gudognIds);
 }

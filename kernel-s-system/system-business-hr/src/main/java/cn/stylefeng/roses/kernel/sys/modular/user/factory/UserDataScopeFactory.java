@@ -118,4 +118,85 @@ public class UserDataScopeFactory {
 
     }
 
+    public static Set<Long> getUserListDataScopeCondition() {
+
+        UserRoleDataScopeApi userRoleDataScopeApi = SpringUtil.getBean(UserRoleDataScopeApi.class);
+        SysUserOrgService sysUserOrgService = SpringUtil.getBean(SysUserOrgService.class);
+        DbOperatorApi dbOperatorApi = SpringUtil.getBean(DbOperatorApi.class);
+        Set<Long> deptUserIdList = new HashSet<>();
+
+                // 获取当前用户的数据范围
+        DataScopeConfig userRoleDataScopeConfig = userRoleDataScopeApi.getUserRoleDataScopeConfig();
+
+        switch (userRoleDataScopeConfig.getDataScopeType()) {
+            // 如果是本人数据
+            case SELF:
+                deptUserIdList.add(userRoleDataScopeConfig.getUserId());
+                return deptUserIdList;
+            // 如果是本部门数据
+            case DEPT:
+
+                // 获取本部门下的所有用户id
+                deptUserIdList = sysUserOrgService.getOrgUserIdList(CollectionUtil.set(false, userRoleDataScopeConfig.getUserDeptId()));
+                if (ObjectUtil.isEmpty(deptUserIdList)) {
+                    deptUserIdList = CollectionUtil.set(false, -1L);
+                }
+                return deptUserIdList;
+
+            // 如果是本部门及有以下部门数据
+            case DEPT_WITH_CHILD:
+
+                // 获取本部门及以下部门有哪些部门
+                Set<Long> subDeptOrgIdList = dbOperatorApi.findSubListByParentId("sys_hr_organization", "org_pids", "org_id", userRoleDataScopeConfig.getUserDeptId());
+                if (ObjectUtil.isEmpty(subDeptOrgIdList)) {
+                    subDeptOrgIdList = new HashSet<>();
+                }
+                subDeptOrgIdList.add(userRoleDataScopeConfig.getUserDeptId());
+
+                // 获取部门下的用户
+                Set<Long> subDeptOrgUserIdList = sysUserOrgService.getOrgUserIdList(subDeptOrgIdList);
+                if (ObjectUtil.isEmpty(subDeptOrgUserIdList)) {
+                    subDeptOrgUserIdList = CollectionUtil.set(false, -1L);
+                }
+                return subDeptOrgUserIdList;
+
+            // 如果是本公司及以下部门数据
+            case COMPANY_WITH_CHILD:
+
+                // 获取本部门及以下部门有哪些部门
+                Set<Long> subCompanyOrgIdList = dbOperatorApi.findSubListByParentId("sys_hr_organization", "org_pids", "org_id", userRoleDataScopeConfig.getUserCompanyId());
+                if (ObjectUtil.isEmpty(subCompanyOrgIdList)) {
+                    subCompanyOrgIdList = new HashSet<>();
+                }
+                subCompanyOrgIdList.add(userRoleDataScopeConfig.getUserCompanyId());
+
+                // 获取部门下的用户
+                Set<Long> subCompanyUserIdList = sysUserOrgService.getOrgUserIdList(subCompanyOrgIdList);
+                if (ObjectUtil.isEmpty(subCompanyUserIdList)) {
+                    subCompanyUserIdList = CollectionUtil.set(false, -1L);
+                }
+                return subCompanyUserIdList;
+
+            // 如果是指定部门数据
+            case DEFINE:
+
+                // 获取指定部门下的用户列表
+                List<Long> specificOrgIds = userRoleDataScopeConfig.getSpecificOrgIds();
+                if (ObjectUtil.isEmpty(specificOrgIds)) {
+                    specificOrgIds = CollectionUtil.list(false, -1L);
+                }
+
+                Set<Long> specificOrgUserIdList = sysUserOrgService.getOrgUserIdList(new HashSet<>(specificOrgIds));
+                if (ObjectUtil.isEmpty(specificOrgUserIdList)) {
+                    specificOrgUserIdList = CollectionUtil.set(false, -1L);
+                }
+                return specificOrgUserIdList;
+            // 如果是全部数据
+            case ALL:
+                break;
+        }
+        return deptUserIdList;
+
+    }
+
 }

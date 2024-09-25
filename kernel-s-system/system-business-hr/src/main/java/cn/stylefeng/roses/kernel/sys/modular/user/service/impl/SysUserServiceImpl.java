@@ -443,6 +443,19 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
+    public Map<Long, String> getGudongMap(Set<String> gudognIds) {
+
+        LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(SysUser::getUserId, gudognIds);
+        wrapper.select(SysUser::getUserId, SysUser::getRealName);
+        List<SysUser> sysUserList = this.list(wrapper);
+        Map<Long, String> gudongMap = sysUserList.stream().collect(Collectors.
+                toMap(SysUser::getUserId,SysUser::getRealName));
+
+        return gudongMap;
+    }
+
+    @Override
     public void editAvatar(SysUserRequest sysUserRequest) {
         // 新头像文件id
         Long fileId = sysUserRequest.getAvatar();
